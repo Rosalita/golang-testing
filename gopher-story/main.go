@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"strconv"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -22,13 +25,7 @@ func main() {
 	awsConfig := aws.Config{Region: aws.String("eu-west-1")}
 	dynamoSession = dynamodb.New(session.New(&awsConfig))
 
-	gopher, err := getGopher("3")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Println(tellStory(gopher))
+	randomStory()
 
 }
 
@@ -56,9 +53,22 @@ func getGopher(gopherID string) (gopher, error) {
 }
 
 func tellStory(g gopher) string {
-
 	story := fmt.Sprintf("Once upon a time there was a gopher called %s. Their fur was %s colour", g.Name, g.Colour)
-
-
 	return story
+}
+
+func randomStory(){
+
+	rand.Seed(time.Now().UnixNano())
+	randNum := rand.Intn(4)
+	ID := strconv.Itoa(randNum)
+
+	gopher, err := getGopher(ID)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(tellStory(gopher))
+
 }
