@@ -1,21 +1,29 @@
 
 Problem 1  
 -----------  
-function tellStory() has no tests  
+Function tellStory() has no tests  
 Examine input & output  
-input is a gopher  
-output is a string  
-write a test that feeds some gophers into tellStory()  
-and assert that a story about the gopher is returned  
+Input is a gopher  
+Output is a string  
+Write a test that feeds some gophers into tellStory()  
+Assert that a story about the gopher is returned  
   
 Problem 2  
 -----------  
-function getGopher() gets a gopher from a real database  
-we want our test to run independently of that database  
-mock the database using the dynamodbiface.DynamoDBAPI package  
-so that the test runs independently of the real database.  
+Function getGopher() gets a gopher from a real database  
+We want our test to run independently of that database  
+Mock the database using the dynamodbiface.DynamoDBAPI package  
+This will let the tests run independently of the real database.  
   
 Problem 3  
 -----------  
-The randomStory() function gets a random story based  
-on the time. So the result will be different each time  
+The randomStory() function gets a random story based on the time.  
+This means the result of randomStory() is not always going to be the same.  
+Mock the time so that randomStory() can be tested at a set moment in time.  
+  
+Problem 4  
+-----------  
+The gopher-story code was not written TDD style.  
+Use TDD to write the code again.  
+Is it better?  
+Has it's testability improved?  
