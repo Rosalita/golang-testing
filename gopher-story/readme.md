@@ -1,7 +1,8 @@
 
 Problem 1  
 -----------  
-function tellStory() has no testsExamine input & output  
+function tellStory() has no tests  
+Examine input & output  
 input is a gopher  
 output is a string  
 write a test that feeds some gophers into tellStory()  
