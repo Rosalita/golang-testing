@@ -5,8 +5,8 @@ Function tellStory() has no tests
 Examine input & output  
 Input is a gopher  
 Output is a string  
-Write some tests that feed gophers into tellStory()  
-Assert that stories about gophers are returned  
+Write a test that feeds some gophers into tellStory()  
+Assert that a story about the gopher is returned  
   
 Problem 2  
 -----------  
