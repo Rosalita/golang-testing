@@ -4,6 +4,7 @@ import (
 	"flag"
 	"os"
 	"testing"
+	"errors"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -20,14 +21,21 @@ func (m *mockDynamoDBClient) GetItem(input *dynamodb.GetItemInput) (*dynamodb.Ge
 
 	switch *input.TableName {
 	case "gophers":
-		result = dynamodb.GetItemOutput{
-			Item: map[string]*dynamodb.AttributeValue{
-				"ID":     {S: aws.String("1")},
-				"Name":   {S: aws.String("Bob")},
-				"Colour": {S: aws.String("Brown")},
-			},
+		if input.Key["ID"].S != nil && *input.Key["ID"].S == "1"{
+			result = dynamodb.GetItemOutput{
+				Item: map[string]*dynamodb.AttributeValue{
+					"ID":     {S: aws.String("1")},
+					"Name":   {S: aws.String("Bob")},
+					"Colour": {S: aws.String("Brown")},
+				},
+			}
 		}
+		if input.Key["ID"].S != nil && *input.Key["ID"].S == "err"{
+			testErr := errors.New("Dynamo Internal Server Error")
+			return &dynamodb.GetItemOutput{}, testErr
 
+		}
+	
 	default:
 		result = dynamodb.GetItemOutput{}
 	}
@@ -46,7 +54,6 @@ func TestMain(m *testing.M) {
 
 	// Test teardown
 	os.Exit(exitCode)
-
 }
 
 func TestGetGopher(t *testing.T) {
@@ -63,6 +70,7 @@ func TestGetGopher(t *testing.T) {
 		err      error
 	}{
 		{"1", expectedGopher, nil},
+		{"err", gopher{}, errors.New("Dynamo Internal Server Error")},
 	}
 
 	for _, test := range tests {
