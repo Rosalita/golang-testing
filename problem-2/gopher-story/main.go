@@ -26,7 +26,11 @@ func main() {
 	awsConfig := aws.Config{Region: aws.String("eu-west-1")}
 	dynamoSession = dynamodb.New(session.New(&awsConfig))
 
-	randomStory()
+	err := randomStory()
+
+	if err != nil {
+		fmt.Println(err)
+	}
 
 }
 
@@ -58,7 +62,7 @@ func tellStory(g gopher) string {
 	return story
 }
 
-func randomStory(){
+func randomStory() error{
 
 	rand.Seed(time.Now().UnixNano())
 	randNum := rand.Intn(4)
@@ -67,9 +71,11 @@ func randomStory(){
 	gopher, err := getGopher(ID)
 
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 
 	fmt.Println(tellStory(gopher))
+
+	return nil
 
 }

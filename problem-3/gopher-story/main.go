@@ -20,14 +20,18 @@ type gopher struct {
 }
 
 var dynamoSession dynamodbiface.DynamoDBAPI
+var getRandomNum func (int) int
+
+
 
 func main() {
 	awsConfig := aws.Config{Region: aws.String("eu-west-1")}
 	dynamoSession = dynamodb.New(session.New(&awsConfig))
+	getRandomNum  = getRandomNumFunc
 
 	err := randomStory()
 
-	if err != nil {
+	if err != nil{
 		fmt.Println(err)
 	}
 
@@ -61,10 +65,9 @@ func tellStory(g gopher) string {
 	return story
 }
 
-func randomStory()error{
+func randomStory() error {
 
-	rand.Seed(time.Now().UnixNano())
-	randNum := rand.Intn(4)
+	randNum := getRandomNum(4)
 	ID := strconv.Itoa(randNum)
 
 	gopher, err := getGopher(ID)
@@ -75,6 +78,12 @@ func randomStory()error{
 
 	fmt.Println(tellStory(gopher))
 
-	return err
+	return nil
 
+}
+
+func getRandomNumFunc(x int) int{
+	rand.Seed(time.Now().UnixNano())
+	randNum := rand.Intn(x)
+	return randNum
 }

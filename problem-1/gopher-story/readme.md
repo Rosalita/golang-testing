@@ -20,8 +20,12 @@ Problem 3
 The randomStory() function gets a random story based on the time.  
 This means the result of randomStory() is not always going to be the same.  
 Mock the time so that randomStory() can be tested at a set moment in time.  
+
+Problem 4
+----------
+How can we test that something is logged?
   
-Problem 4  
+Problem 5 
 -----------  
 The gopher-story code was not written TDD style.  
 Use TDD to write the code again.  
