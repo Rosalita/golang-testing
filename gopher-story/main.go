@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"strconv"
 	"time"
@@ -61,7 +62,7 @@ func tellStory(g gopher) string {
 	return story
 }
 
-func randomStory()error{
+func randomStory() error {
 
 	rand.Seed(time.Now().UnixNano())
 	randNum := rand.Intn(4)
@@ -73,7 +74,7 @@ func randomStory()error{
 		return err
 	}
 
-	fmt.Println(tellStory(gopher))
+	log.Println(tellStory(gopher))
 
 	return err
 

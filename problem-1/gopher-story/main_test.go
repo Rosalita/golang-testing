@@ -21,7 +21,7 @@ func TestTellStory(t *testing.T) {
 	gopherWithColourExpected := "Once upon a time there was a gopher called . Their fur was Red colour"
 
 	gopherWithNameAndColour := gopher{
-		Name: "Rosalita",
+		Name:   "Rosalita",
 		Colour: "Pink",
 	}
 	gopherWithNameAndColourExpected := "Once upon a time there was a gopher called Rosalita. Their fur was Pink colour"

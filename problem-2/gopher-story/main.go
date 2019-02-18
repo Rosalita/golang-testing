@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strconv"
 	"time"
+	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -74,7 +75,7 @@ func randomStory() error{
 		return err
 	}
 
-	fmt.Println(tellStory(gopher))
+	log.Println(tellStory(gopher))
 
 	return nil
 

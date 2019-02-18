@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"strconv"
 	"time"
@@ -20,18 +21,16 @@ type gopher struct {
 }
 
 var dynamoSession dynamodbiface.DynamoDBAPI
-var getRandomNum func (int) int
-
-
+var getRandomNum func(int) int
 
 func main() {
 	awsConfig := aws.Config{Region: aws.String("eu-west-1")}
 	dynamoSession = dynamodb.New(session.New(&awsConfig))
-	getRandomNum  = getRandomNumFunc
+	getRandomNum = getRandomNumFunc
 
 	err := randomStory()
 
-	if err != nil{
+	if err != nil {
 		fmt.Println(err)
 	}
 
@@ -76,13 +75,13 @@ func randomStory() error {
 		return err
 	}
 
-	fmt.Println(tellStory(gopher))
+	log.Println(tellStory(gopher))
 
 	return nil
 
 }
 
-func getRandomNumFunc(x int) int{
+func getRandomNumFunc(x int) int {
 	rand.Seed(time.Now().UnixNano())
 	randNum := rand.Intn(x)
 	return randNum

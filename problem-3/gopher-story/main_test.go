@@ -54,7 +54,6 @@ func TestMain(m *testing.M) {
 	getRandomNum = getFakeRandNum
 	dynamoSession = &mockDynamoDBClient{}
 
-
 	// Run tests
 	exitCode := m.Run()
 
