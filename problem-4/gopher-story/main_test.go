@@ -118,6 +118,6 @@ func TestRandomStory(t *testing.T) {
 		logged := buffer.String()
 		assert.Contains(t, logged, test.logged)
 		assert.Equal(t, test.err, err)
-
+		buffer.Reset()
 	}
 }
